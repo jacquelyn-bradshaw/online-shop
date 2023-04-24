@@ -12,3 +12,45 @@ main {
   max-width: 40rem;
   text-align: center;
 }
+
+#main-header {
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(70, 0, 128);
+}
+
+#main-header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#main-header li {
+  margin: 0 1rem;
+}
+
+#main-header a {
+  text-decoration: none;
+  color: white;
+}
+
+#main-header button {
+  font: inherit;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  color: white;
+  padding: 0;
+}
+
+#main-header a:hover,
+#main-header a:active,
+#main-header button:hover,
+#main-header button:active {
+  color: rgb(209, 88, 233);
+}
