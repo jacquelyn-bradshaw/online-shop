@@ -17,10 +17,7 @@ function getLogin(req, res) {
 }
 
 async function signup(req, res) {
-  const userData = req.body
-  const email = userData.email
-  const confirmEmail = userData["confirm-email"]
-  const password = userData.password
+  const {email, confirmEmail, password} = req.body
 
   if (!validation.userCredentialsAreValid(email, confirmEmail, password)) {
     validationSession.flashErrorsToSession(req, {
