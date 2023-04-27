@@ -7,6 +7,7 @@ const csrf = require("csurf")
 const sessionConfig = require("./config/session")
 const db = require("./data/database")
 const authRoutes = require("./routes/auth")
+const authMiddleware = require("./middlewares/authMiddleware")
 const addCSRFTokenMiddleware = require("./middlewares/csrf-token-middleware")
 
 const MongoDBSessionStore = sessionConfig.createSessionStore(session)
@@ -24,9 +25,14 @@ app.use(session(sessionConfig.createSessionConfig(MongoDBSessionStore)))
 app.use(csrf())
 
 app.use(addCSRFTokenMiddleware)
+app.use(authMiddleware)
 
 app.get("/", function(req, res) {
   res.render("index")
+})
+
+app.get("/products", function(req, res) {
+  res.render("allProducts")
 })
 
 app.use(authRoutes)
