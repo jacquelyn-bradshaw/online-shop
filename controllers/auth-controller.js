@@ -13,7 +13,11 @@ function getSignup(req, res) {
 }
 
 function getLogin(req, res) {
-  res.render("authentication/login")
+  const sessionErrorData = validationSession.getSessionErrorData(req, {
+    email: "",
+    password: ""
+  })
+  res.render("authentication/login", {inputData: sessionErrorData})
 }
 
 async function signup(req, res) {
@@ -54,13 +58,57 @@ async function signup(req, res) {
   res.redirect("/login")
 }
 
+async function login(req, res) {
+  const {email, password} = req.body
+
+  const newUser = new User(email, password)
+  const existingUser = await newUser.getUserWithSameEmail()
+
+  if(!existingUser) {
+    validationSession.flashErrorsToSession(req, {
+      message: "Could not log you in - please check your credentials.",
+      email: email,
+      password: password
+    },
+    function () {
+      res.redirect("/login")
+    })
+
+    return
+  }
+
+  const passwordsAreEqual = await newUser.login(existingUser.password)
+
+  if(!passwordsAreEqual) {
+    validationSession.flashErrorsToSession(req, {
+      message: "Could not log you in - please check your credentials.",
+      email: email,
+      password: password
+    },
+    function () {
+      res.redirect("/login")
+    })
+
+    return
+  }
+
+  req.session.user = {id: existingUser._id, email: existingUser.email}
+  req.session.isAuthenticated = true
+  req.session.save(function () {
+    res.redirect("/products")
+  })
+}
+
 function logout(req, res) {
-  res.render("index")
+  req.session.user = null
+  req.session.isAuthenticated = false
+  res.redirect("/")
 }
 
 module.exports = {
   getSignup: getSignup,
   getLogin: getLogin,
   signup: signup,
+  login: login,
   logout:logout
 }

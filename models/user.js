@@ -33,6 +33,14 @@ class User {
     })
     return result
   }
+
+  async login(comparePassword) {
+    const passwordsAreEqual = await bcrypt.compare(
+      this.password,
+      comparePassword
+    )
+    return passwordsAreEqual
+  }
 }
 
 module.exports = User
