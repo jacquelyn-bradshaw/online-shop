@@ -10,8 +10,7 @@ class Product {
     const products = await db
     .getDb()
     .collection("products")
-    .find({})
-    //.project({title:1, summary:1})
+    .find({}, { title: 1, summary: 1})
     .toArray()
 
     return products
