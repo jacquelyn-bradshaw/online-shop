@@ -7,6 +7,7 @@ const csrf = require("csurf")
 const sessionConfig = require("./config/session")
 const db = require("./data/database")
 const authRoutes = require("./routes/auth")
+const productRoutes = require("./routes/products")
 const authMiddleware = require("./middlewares/authMiddleware")
 const addCSRFTokenMiddleware = require("./middlewares/csrf-token-middleware")
 
@@ -31,11 +32,8 @@ app.get("/", function(req, res) {
   res.render("index")
 })
 
-app.get("/products", function(req, res) {
-  res.render("allProducts")
-})
-
 app.use(authRoutes)
+app.use(productRoutes)
 
 db.connectToDatabase().then(function () {
   app.listen(3000)

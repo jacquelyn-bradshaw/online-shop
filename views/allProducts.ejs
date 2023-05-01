@@ -1,11 +1,18 @@
 <html>
   <head>
     <%- include("includes/head.ejs", { title: "Products" }) %>
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/products.css" />
   </head>
   <body>
     <header><%- include("includes/header.ejs") %></header>
-    <main>
+    <main id="all-products">
       <h1>Products</h1>
+      <ol id="products-list">
+        <% for (const product of products) { %>
+        <li><%- include("includes/product-item", {product:product}) %></li>
+        <% } %>
+      </ol>
     </main>
   </body>
 </html>

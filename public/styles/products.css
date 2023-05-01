@@ -1,0 +1,29 @@
+#all-products {
+  text-align: center;
+}
+
+#products-list {
+  margin: 3rem auto;
+  max-width: 40rem;
+  list-style: none;
+}
+
+#product-item {
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: rgb(220, 204, 252);
+}
+
+#product-item h2,
+#product-item p {
+  margin: 0.5rem 0;
+}
+
+#product-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
