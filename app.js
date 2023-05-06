@@ -35,6 +35,10 @@ app.get("/", function(req, res) {
 app.use(authRoutes)
 app.use(productRoutes)
 
+app.use(function(error, req, res, next) {
+  res.render('500');
+})
+
 db.connectToDatabase().then(function () {
   app.listen(3000)
 })

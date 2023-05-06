@@ -10,10 +10,19 @@ class Product {
     const products = await db
     .getDb()
     .collection("products")
-    .find({}, { title: 1, summary: 1})
+    .find({}, { title: 1, image: 1})
     .toArray()
 
     return products
+  }
+
+  async getProduct(id) {
+    const product = await db
+    .getDb()
+    .collection("products")
+    .findOne({_id: id})
+
+    return product
   }
 }
 
