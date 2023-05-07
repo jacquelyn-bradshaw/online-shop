@@ -5,8 +5,11 @@
       <% if (!locals.isAuth) { %>
       <li><a href="/signup">Signup</a></li>
       <li><a href="/login">Login</a></li>
-      <% } %> <% if (locals.isAuth) { %>
+      <% } else { %>
       <li><a href="/products">Products</a></li>
+      <% if (locals.isAdmin) { %>
+      <li><a href="/admin">Admin</a></li>
+      <% } %>
       <li>
         <form action="/logout" method="POST">
           <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf" />

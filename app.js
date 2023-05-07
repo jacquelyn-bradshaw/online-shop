@@ -7,6 +7,7 @@ const csrf = require("csurf")
 const sessionConfig = require("./config/session")
 const db = require("./data/database")
 const authRoutes = require("./routes/auth")
+const adminRoutes = require("./routes/admin")
 const productRoutes = require("./routes/products")
 const authMiddleware = require("./middlewares/authMiddleware")
 const addCSRFTokenMiddleware = require("./middlewares/csrf-token-middleware")
@@ -33,6 +34,7 @@ app.get("/", function(req, res) {
 })
 
 app.use(authRoutes)
+app.use(adminRoutes)
 app.use(productRoutes)
 
 app.use(function(error, req, res, next) {

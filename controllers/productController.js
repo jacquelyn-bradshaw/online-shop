@@ -1,8 +1,7 @@
 const mongodb = require("mongodb")
+const Product = require("../models/product")
 
 const ObjectId = mongodb.ObjectId
-
-const Product = require("../models/product")
 
 async function allProducts(req, res) {
   const product = new Product()
