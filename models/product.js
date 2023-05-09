@@ -1,8 +1,9 @@
 const db = require("../data/database")
 
 class Product {
-  constructor(title, summary) {
+  constructor(title, price, summary) {
     this.title = title
+    this.price = price
     this.summary = summary
   }
 
@@ -23,6 +24,10 @@ class Product {
     .findOne({_id: id})
 
     return product
+  }
+
+  async saveProduct() {
+
   }
 }
 
