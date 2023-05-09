@@ -7,6 +7,16 @@ function userCredentialsAreValid(email, confirmEmail, password) {
   email.includes("@")
 }
 
+function productIsValid(title, price, summary) {
+  return title && 
+  price && 
+  summary &&
+  title.trim() !== "" && 
+  price.trim() !== "" &&
+  summary.trim() !== ""
+}
+
 module.exports = {
-  userCredentialsAreValid: userCredentialsAreValid
+  userCredentialsAreValid: userCredentialsAreValid,
+  productIsValid: productIsValid
 }

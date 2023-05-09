@@ -27,7 +27,12 @@ class Product {
   }
 
   async saveProduct() {
-
+    const result = await db.getDb().collection("products").insertOne({
+      title: this.title,
+      price: this.price,
+      summary: this.summary
+    })
+    return result
   }
 }
 
