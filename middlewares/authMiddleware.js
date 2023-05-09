@@ -8,11 +8,6 @@ async function auth (req, res, next) {
   }
 
   res.locals.isAuth = isAuth
-
-  if(!isAdmin) {
-    return next()
-  }
-
   res.locals.isAdmin = isAdmin
 
   next()
