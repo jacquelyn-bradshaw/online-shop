@@ -19,8 +19,10 @@ const app = express()
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
 
-app.use(express.static("public"))
 app.use(express.urlencoded({extended: false}))
+app.use(express.static("public"))
+app.use("/images", express.static("images"))
+
 
 app.use(session(sessionConfig.createSessionConfig(MongoDBSessionStore)))
 
@@ -38,6 +40,7 @@ app.use(adminRoutes)
 app.use(productRoutes)
 
 app.use(function(error, req, res, next) {
+  console.log(JSON.stringify(error));
   res.render('500');
 })
 

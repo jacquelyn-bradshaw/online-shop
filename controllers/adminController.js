@@ -16,7 +16,8 @@ function addProductView(req, res) {
 
   sessionErrorData = validationSession.getSessionErrorData(req, {
     title: "",
-    content: ""
+    price: "",
+    summary: ""
   })
 
   res.render("addProduct", {inputData: sessionErrorData})
@@ -24,6 +25,13 @@ function addProductView(req, res) {
 
 async function addProduct(req, res) {
   const {title, price, summary} = req.body
+  // const title = req.body.title
+  // const price = req.body.price
+  // const summary = req.body.summary
+
+  //const image = req.file
+
+  //const imagePath = uploadedImageFile.path
 
   if (!validation.productIsValid(title, price, summary)) {
     validationSession.flashErrorsToSession(req, {
@@ -41,6 +49,8 @@ async function addProduct(req, res) {
 
   const newProduct = new Product(title, price, summary)
   await newProduct.saveProduct()
+
+//console.log(image)
 
   res.redirect("/admin")
 }
