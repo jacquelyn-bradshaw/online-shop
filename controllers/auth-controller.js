@@ -94,6 +94,7 @@ async function login(req, res) {
 
   req.session.user = {id: existingUser._id, email: existingUser.email}
   req.session.isAuthenticated = true
+  req.session.isAdmin = existingUser.isAdmin
   req.session.save(function () {
     res.redirect("/products")
   })
