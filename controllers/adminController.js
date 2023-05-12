@@ -16,6 +16,7 @@ function addProductView(req, res) {
 
   sessionErrorData = validationSession.getSessionErrorData(req, {
     title: "",
+    image: "",
     price: "",
     summary: ""
   })
@@ -29,14 +30,15 @@ async function addProduct(req, res) {
   // const price = req.body.price
   // const summary = req.body.summary
 
-  //const image = req.file
+  const image = req.file.originalname
 
   //const imagePath = uploadedImageFile.path
 
-  if (!validation.productIsValid(title, price, summary)) {
+  if (!validation.productIsValid(title, image, price, summary)) {
     validationSession.flashErrorsToSession(req, {
       message: "Invalid input - please check your data",
       title: title,
+      image: image,
       price: price,
       summary: summary
     },
@@ -47,7 +49,7 @@ async function addProduct(req, res) {
     return
   }
 
-  const newProduct = new Product(title, price, summary)
+  const newProduct = new Product(title, image, price, summary)
   await newProduct.saveProduct()
 
 //console.log(image)

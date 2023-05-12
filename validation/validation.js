@@ -7,11 +7,12 @@ function userCredentialsAreValid(email, confirmEmail, password) {
   email.includes("@")
 }
 
-function productIsValid(title, price, summary) {
+function productIsValid(title, image, price, summary) {
   return title && 
+  image &&
   price && 
   summary &&
-  title.trim() !== "" && 
+  title.trim() !== "" &&
   price.trim() !== "" &&
   summary.trim() !== ""
 }

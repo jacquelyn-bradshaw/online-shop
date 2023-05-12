@@ -12,7 +12,7 @@
       <p id="input-error"><%= inputData.message %></p>
       <% } %>
       <form action="/signup" method="POST">
-        <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf" />
+        <!-- <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf" /> -->
         <div class="form-control">
           <label for="email">Email</label>
           <input

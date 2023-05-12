@@ -11,11 +11,8 @@
       <% if (inputData.hasError) { %>
       <p id="input-error"><%= inputData.message %></p>
       <% } %>
-      <form
-        action="/add"
-        method="POST"
-        enctype="multipart/form-data?_csrf=<%= locals.csrfToken %>"
-      >
+      <form action="/add" method="POST" enctype="multipart/form-data">
+        <!-- <input type="hidden" value="<%= locals.csrfToken %>" name="_csrf" /> -->
         <div class="form-control">
           <label for="title">Title</label>
           <input
@@ -26,7 +23,7 @@
             required
           />
         </div>
-        <!-- <div class="form-control">
+        <div class="form-control">
           <label for="image">Product Image</label>
           <input
             type="file"
@@ -36,7 +33,7 @@
             required
             accept=".jpg,.jpeg"
           />
-        </div> -->
+        </div>
         <div class="form-control">
           <label for="price">Price</label>
           <input

@@ -1,8 +1,9 @@
 const db = require("../data/database")
 
 class Product {
-  constructor(title, price, summary) {
+  constructor(title, image, price, summary) {
     this.title = title
+    this.image = image
     this.price = price
     this.summary = summary
   }
@@ -29,6 +30,7 @@ class Product {
   async saveProduct() {
     const result = await db.getDb().collection("products").insertOne({
       title: this.title,
+      image: this.image,
       price: this.price,
       summary: this.summary
     })
