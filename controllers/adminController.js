@@ -26,13 +26,8 @@ function addProductView(req, res) {
 
 async function addProduct(req, res) {
   const {title, price, summary} = req.body
-  // const title = req.body.title
-  // const price = req.body.price
-  // const summary = req.body.summary
 
   const image = req.file.originalname
-
-  //const imagePath = uploadedImageFile.path
 
   if (!validation.productIsValid(title, image, price, summary)) {
     validationSession.flashErrorsToSession(req, {
@@ -51,8 +46,6 @@ async function addProduct(req, res) {
 
   const newProduct = new Product(title, image, price, summary)
   await newProduct.saveProduct()
-
-//console.log(image)
 
   res.redirect("/admin")
 }
