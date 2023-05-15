@@ -1,6 +1,11 @@
 const express = require("express")
 const multer = require("multer")
+const validation = require("../validation/validation")
 const adminController = require("../controllers/adminController")
+
+function hasRequiredFields({title, price, summary}, image) {
+  return validation.productIsValid(title, image, price, summary)
+}
 
 const storageConfig = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -11,7 +16,13 @@ const storageConfig = multer.diskStorage({
   }
 })
 
-const upload = multer({storage: storageConfig})
+const upload = multer({
+  storage: storageConfig,
+  fileFilter: function(req, file, cb) {
+    req.locals = {filename: file.originalname}
+    cb(null, hasRequiredFields(req.body, file.originalname))
+  }
+})
 
 const router = express.Router()
 

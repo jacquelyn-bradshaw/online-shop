@@ -23,17 +23,6 @@
           />
         </div>
         <div class="form-control">
-          <label for="image">Product Image</label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            value="<%= inputData.image  %>"
-            required
-            accept=".jpg,.jpeg"
-          />
-        </div>
-        <div class="form-control">
           <label for="price">Price</label>
           <input
             type="text"
@@ -51,6 +40,17 @@
             name="summary"
             value="<%= inputData.summary  %>"
             required
+          />
+        </div>
+        <div class="form-control">
+          <label for="image">Product Image</label>
+          <input
+            type="file"
+            id="image"
+            name="image"
+            value="<%= inputData.image  %>"
+            required
+            accept=".jpg,.jpeg"
           />
         </div>
         <button class="btn">Save</button>

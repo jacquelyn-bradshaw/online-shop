@@ -27,9 +27,11 @@ function addProductView(req, res) {
 async function addProduct(req, res) {
   const {title, price, summary} = req.body
 
-  const image = req.file.originalname
+  const image = req.locals.filename
 
-  if (!validation.productIsValid(title, image, price, summary)) {
+  console.log(JSON.stringify(req.body))
+  console.log(image)
+  if (!req.file || !validation.productIsValid(title, image, price, summary)) {
     validationSession.flashErrorsToSession(req, {
       message: "Invalid input - please check your data",
       title: title,
@@ -40,7 +42,7 @@ async function addProduct(req, res) {
     function () {
       res.redirect("/add")
     })
-
+    
     return
   }
 
