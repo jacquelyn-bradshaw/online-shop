@@ -1,8 +1,10 @@
 const db = require("../data/database")
 
 class Product {
-  constructor(title, summary) {
+  constructor(title, image, price, summary) {
     this.title = title
+    this.image = image
+    this.price = price
     this.summary = summary
   }
 
@@ -23,6 +25,16 @@ class Product {
     .findOne({_id: id})
 
     return product
+  }
+
+  async saveProduct() {
+    const result = await db.getDb().collection("products").insertOne({
+      title: this.title,
+      image: this.image,
+      price: this.price,
+      summary: this.summary
+    })
+    return result
   }
 }
 

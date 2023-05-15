@@ -21,6 +21,11 @@
   margin: 0.5rem 0;
 }
 
+#product-item img {
+  width: 200px;
+  height: 200px;
+}
+
 #product-actions {
   display: flex;
   justify-content: center;
