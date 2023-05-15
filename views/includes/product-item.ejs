@@ -2,6 +2,18 @@
   <h2><%= product.title %></h2>
   <img src="/images/<%= product.image %>" alt="Product Image" />
   <div id="product-actions">
-    <a id="btn" href="/products/<%= product._id %>">View Product</a>
+    <ul>
+      <li><a id="btn" href="/products/<%= product._id %>">View Product</a></li>
+      <% if (locals.isAdmin) { %>
+      <li>
+        <a id="btn" href="/products/<%= product._id %>/edit">Edit Product</a>
+      </li>
+      <li>
+        <a id="btn" href="/products/<%= product._id %>/delete"
+          >Delete Product</a
+        >
+      </li>
+      <% } %>
+    </ul>
   </div>
 </article>
