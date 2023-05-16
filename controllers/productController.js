@@ -10,16 +10,8 @@ async function allProducts(req, res) {
 }
 
 async function viewProduct(req, res) {
-  let productId = req.params.id
-
-  try {
-    productId = new ObjectId(productId)
-  } catch {
-    return res.status(404).render("404")
-  }
-
-  let product = new Product()
-  product = await product.getProduct(productId)
+  let product = new Product(null, null, null, null, req.params.id)
+  product = await product.getProduct()
   
   if(!product) {
     return res.status(404).render("404")

@@ -32,4 +32,6 @@ router.get("/add", adminController.addProductView)
 
 router.post("/add", upload.single("image"), adminController.addProduct)
 
+router.get("/products/:id/edit", adminController.editProductView)
+
 module.exports = router

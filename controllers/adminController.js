@@ -52,8 +52,20 @@ async function addProduct(req, res) {
   res.redirect("/admin")
 }
 
+async function editProductView(req, res) {
+  let product = new Product(null, null, null, null, req.params.id)
+  product = await product.getProduct()
+
+  if (!product) {
+    return res.status(404).render("404")
+  }
+
+  res.render("editProduct", {product: product})
+}
+
 module.exports = {
   viewAdmin: viewAdmin,
   addProductView: addProductView,
-  addProduct: addProduct
+  addProduct: addProduct,
+  editProductView: editProductView
 }
