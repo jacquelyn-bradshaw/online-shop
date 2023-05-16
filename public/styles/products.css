@@ -40,3 +40,8 @@
 #product-actions a {
   text-decoration: none;
 }
+
+#product-detail a {
+  text-decoration: none;
+  display: block;
+}
