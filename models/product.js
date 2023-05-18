@@ -42,6 +42,15 @@ class Product {
     })
     return result
   }
+
+  async updateProduct() {
+    const result = await db.getDb().collection("products").updateOne({_id: this.id}, { $set: {
+      title: this.title,
+      image: this.image,
+      price: this.price,
+      summary: this.summary
+    }})
+  }
 }
 
 module.exports = Product

@@ -29,8 +29,6 @@ async function addProduct(req, res) {
 
   const image = req.locals.filename
 
-  console.log(JSON.stringify(req.body))
-  console.log(image)
   if (!req.file || !validation.productIsValid(title, image, price, summary)) {
     validationSession.flashErrorsToSession(req, {
       message: "Invalid input - please check your data",
@@ -63,9 +61,21 @@ async function editProductView(req, res) {
   res.render("editProduct", {product: product})
 }
 
+async function updateProduct(req, res) {
+  const {title, price, summary} = req.body
+
+  const image = req.locals.filename
+
+  const newProduct = new Product(title, image, price, summary, req.params.id)
+  await newProduct.updateProduct()
+
+  res.redirect("/admin")
+}
+
 module.exports = {
   viewAdmin: viewAdmin,
   addProductView: addProductView,
   addProduct: addProduct,
-  editProductView: editProductView
+  editProductView: editProductView,
+  updateProduct: updateProduct
 }
