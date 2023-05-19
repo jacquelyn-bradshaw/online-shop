@@ -14,10 +14,22 @@
       <a id="btn" href="">Add to basket</a>
       <% } %>
       <p><%= product.summary %></p>
-      <% if (locals.isAdmin) { %>
-      <a id="btn" href="/products/<%= product._id %>/edit">Edit Product</a>
-      <a id="btn" href="/products/<%= product._id %>/delete">Delete Product</a>
-      <% } %>
+      <div id="product-actions">
+        <% if (locals.isAdmin) { %>
+        <ul>
+          <li>
+            <a id="btn" href="/products/<%= product._id %>/edit">
+              Edit Product
+            </a>
+          </li>
+          <li>
+            <form action="/products/<%= product._id %>/delete" method="POST">
+              <button class="btn btn-alt">Delete Product</button>
+            </form>
+          </li>
+        </ul>
+        <% } %>
+      </div>
     </main>
   </body>
 </html>

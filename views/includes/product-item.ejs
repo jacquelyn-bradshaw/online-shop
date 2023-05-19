@@ -9,9 +9,9 @@
         <a id="btn" href="/products/<%= product._id %>/edit">Edit Product</a>
       </li>
       <li>
-        <a id="btn" href="/products/<%= product._id %>/delete"
-          >Delete Product</a
-        >
+        <form action="/products/<%= product._id %>/delete" method="POST">
+          <button class="btn btn-alt">Delete Product</button>
+        </form>
       </li>
       <% } %>
     </ul>

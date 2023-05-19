@@ -51,6 +51,10 @@ async function addProduct(req, res) {
 }
 
 async function editProductView(req, res) {
+  if (!res.locals.isAdmin) {
+    return res.status(403).render("403")
+  }
+  
   let product = new Product(null, null, null, null, req.params.id)
   product = await product.getProduct()
 
@@ -72,10 +76,18 @@ async function updateProduct(req, res) {
   res.redirect("/admin")
 }
 
+async function deleteProduct(req, res) {
+  const deleteProduct = new Product(null, null, null, null, req.params.id)
+  await deleteProduct.delProduct()
+
+  res.redirect("/admin")
+}
+
 module.exports = {
   viewAdmin: viewAdmin,
   addProductView: addProductView,
   addProduct: addProduct,
   editProductView: editProductView,
-  updateProduct: updateProduct
+  updateProduct: updateProduct,
+  deleteProduct: deleteProduct
 }

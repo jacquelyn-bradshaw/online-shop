@@ -51,6 +51,10 @@ class Product {
       summary: this.summary
     }})
   }
+
+  async delProduct() {
+    const result = await db.getDb().collection("products").deleteOne({_id: this.id})
+  }
 }
 
 module.exports = Product
