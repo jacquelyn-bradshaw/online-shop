@@ -1,12 +1,10 @@
 const mongodb = require("mongodb")
 const Product = require("../models/product")
 
-const ObjectId = mongodb.ObjectId
-
 async function allProducts(req, res) {
   const product = new Product()
   const products = await product.getAllProducts()
-  res.render("allProducts", {products: products})
+  res.render("product/allProducts", {products: products})
 }
 
 async function viewProduct(req, res) {
@@ -14,10 +12,10 @@ async function viewProduct(req, res) {
   product = await product.getProduct()
   
   if(!product) {
-    return res.status(404).render("404")
+    return res.status(404).render("errors/404")
   }
 
-  res.render("singleProduct", {product: product})
+  res.render("product/singleProduct", {product: product})
 }
 
 module.exports = {

@@ -6,12 +6,12 @@ function viewAdmin(req, res) {
   if (!res.locals.isAdmin) {
     return res.status(403).render("403")
   }
-  res.render("admin")
+  res.render("admin/admin")
 }
 
 function addProductView(req, res) {
   if (!res.locals.isAdmin) {
-    return res.status(403).render("403")
+    return res.status(403).render("errors/403")
   }
 
   sessionErrorData = validationSession.getSessionErrorData(req, {
@@ -52,14 +52,14 @@ async function addProduct(req, res) {
 
 async function editProductView(req, res) {
   if (!res.locals.isAdmin) {
-    return res.status(403).render("403")
+    return res.status(403).render("errors/403")
   }
   
   let product = new Product(null, null, null, null, req.params.id)
   product = await product.getProduct()
 
   if (!product) {
-    return res.status(404).render("404")
+    return res.status(404).render("errors/404")
   }
 
   res.render("editProduct", {product: product})
