@@ -6,12 +6,12 @@ function viewAdmin(req, res) {
   if (!res.locals.isAdmin) {
     return res.status(403).render("403")
   }
-  res.render("admin")
+  res.render("admin/index")
 }
 
 function addProductView(req, res) {
   if (!res.locals.isAdmin) {
-    return res.status(403).render("403")
+    return res.status(403).render("errors/403")
   }
 
   sessionErrorData = validationSession.getSessionErrorData(req, {
@@ -29,8 +29,6 @@ async function addProduct(req, res) {
 
   const image = req.locals.filename
 
-  console.log(JSON.stringify(req.body))
-  console.log(image)
   if (!req.file || !validation.productIsValid(title, image, price, summary)) {
     validationSession.flashErrorsToSession(req, {
       message: "Invalid input - please check your data",
@@ -52,8 +50,44 @@ async function addProduct(req, res) {
   res.redirect("/admin")
 }
 
+async function editProductView(req, res) {
+  if (!res.locals.isAdmin) {
+    return res.status(403).render("errors/403")
+  }
+  
+  let product = new Product(null, null, null, null, req.params.id)
+  product = await product.getProduct()
+
+  if (!product) {
+    return res.status(404).render("errors/404")
+  }
+
+  res.render("editProduct", {product: product})
+}
+
+async function updateProduct(req, res) {
+  const {title, price, summary} = req.body
+
+  const image = req.locals.filename
+
+  const newProduct = new Product(title, image, price, summary, req.params.id)
+  await newProduct.updateProduct()
+
+  res.redirect("/admin")
+}
+
+async function deleteProduct(req, res) {
+  const deleteProduct = new Product(null, null, null, null, req.params.id)
+  await deleteProduct.delProduct()
+
+  res.redirect("/admin")
+}
+
 module.exports = {
   viewAdmin: viewAdmin,
   addProductView: addProductView,
-  addProduct: addProduct
+  addProduct: addProduct,
+  editProductView: editProductView,
+  updateProduct: updateProduct,
+  deleteProduct: deleteProduct
 }

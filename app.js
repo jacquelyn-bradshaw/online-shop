@@ -34,7 +34,7 @@ app.use(productRoutes)
 
 app.use(function(error, req, res, next) {
   console.log(JSON.stringify(error));
-  res.render('500');
+  res.render('errors/500');
 })
 
 db.connectToDatabase().then(function () {

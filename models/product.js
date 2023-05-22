@@ -1,11 +1,17 @@
+const mongodb = require("mongodb")
 const db = require("../data/database")
 
+const ObjectId = mongodb.ObjectId
+
 class Product {
-  constructor(title, image, price, summary) {
+  constructor(title, image, price, summary, id) {
     this.title = title
     this.image = image
     this.price = price
     this.summary = summary
+    if (id) {
+      this.id = new ObjectId(id)
+    }
   }
 
   async getAllProducts() {
@@ -18,11 +24,11 @@ class Product {
     return products
   }
 
-  async getProduct(id) {
+  async getProduct() {
     const product = await db
     .getDb()
     .collection("products")
-    .findOne({_id: id})
+    .findOne({_id: this.id})
 
     return product
   }
@@ -35,6 +41,19 @@ class Product {
       summary: this.summary
     })
     return result
+  }
+
+  async updateProduct() {
+    const result = await db.getDb().collection("products").updateOne({_id: this.id}, { $set: {
+      title: this.title,
+      image: this.image,
+      price: this.price,
+      summary: this.summary
+    }})
+  }
+
+  async delProduct() {
+    const result = await db.getDb().collection("products").deleteOne({_id: this.id})
   }
 }
 

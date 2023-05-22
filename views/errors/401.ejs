@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <%- include("../includes/head.ejs", { title: "Not authenticated" }) %>
+    <link rel="stylesheet" href="/styles/base.css" />
+  </head>
+  <body>
+    <header><%- include("../includes/header.ejs") %></header>
+    <main>
+      <h1>Not authenticated!</h1>
+      <p>
+        You are not authenticated and therefore not allowed to access this page!
+      </p>
+      <a class="btn" href="/">Back To Home Page</a>
+    </main>
+  </body>
+</html>
