@@ -6,7 +6,7 @@ function viewAdmin(req, res) {
   if (!res.locals.isAdmin) {
     return res.status(403).render("403")
   }
-  res.render("admin/admin")
+  res.render("admin/index")
 }
 
 function addProductView(req, res) {
