@@ -30,5 +30,7 @@ You will need the following installed on your machine:
 
 ## 🏁 Start the website
 
+- Install mongodb on your machine
+- Ensure in database.js that the connect function uses your mongodb connection route
 - Install dependencies
 - Npm start
