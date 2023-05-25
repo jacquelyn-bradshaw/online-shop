@@ -37,6 +37,11 @@ app.use(function(error, req, res, next) {
   res.render('errors/500');
 })
 
-db.connectToDatabase().then(function () {
-  app.listen(3000)
-})
+db.connectToDatabase()
+  .then(function () {
+    app.listen(3000)
+  })
+  .catch(function (error) {
+    console.log("Failed to connect to the database!")
+    console.log(error)
+  })
