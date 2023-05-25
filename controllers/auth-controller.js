@@ -6,7 +6,11 @@ function getSignup(req, res) {
   const sessionErrorData = validationSession.getSessionErrorData(req, {
     email: "",
     confirmEmail: "",
-    password: ""
+    password: "",
+    fullName: "",
+    street: "",
+    city: "",
+    postcode: ""
   })
 
   res.render("authentication/signup", {inputData: sessionErrorData})
@@ -21,14 +25,18 @@ function getLogin(req, res) {
 }
 
 async function signup(req, res) {
-  const {email, confirmEmail, password} = req.body
+  const {email, confirmEmail, password, fullName, street, city, postcode} = req.body
 
-  if (!validation.userCredentialsAreValid(email, confirmEmail, password)) {
+  if (!validation.userCredentialsAreValid(email, confirmEmail, password, fullName, street, city, postcode)) {
     validationSession.flashErrorsToSession(req, {
       message: "Invalid input - please check your data",
       email: email,
       confirmEmail: confirmEmail,
-      password: password
+      password: password,
+      fullName: fullName,
+      street: street,
+      city: city,
+      postcode: postcode
     },
     function () {
       res.redirect("/signup")
@@ -36,7 +44,7 @@ async function signup(req, res) {
     return
   }
 
-  const newUser = new User(email, password)
+  const newUser = new User(email, password, fullName, street, city, postcode)
   const existingUser = await newUser.existsAlready()
   
   if(existingUser) {
@@ -44,7 +52,11 @@ async function signup(req, res) {
       message: "User exists already.",
       email: email,
       confirmEmail: confirmEmail,
-      password: password
+      password: password,
+      fullName: fullName,
+      street: street,
+      city: city,
+      postcode: postcode
     },
     function () {
       res.redirect("/signup")
