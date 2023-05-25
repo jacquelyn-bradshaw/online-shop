@@ -6,9 +6,10 @@ class User {
     this.email = email
     this.password = password
     this.fullName = fullName
-    this.street = street
-    this.city = city
-    this.postcode = postcode
+    this.address = {
+      street: street,
+      city: city,
+      postcode: postcode}
   }
 
   async getUserWithSameEmail() {
@@ -31,15 +32,12 @@ class User {
 
   async signup() {
     const hashedPassword = await bcrypt.hash(this.password, 12)
-    const result = await db.getDb().collection("users").insertOne({
+    await db.getDb().collection("users").insertOne({
       email: this.email,
       password: hashedPassword,
       fullName: this.fullName,
-      street: this.street,
-      city: this.city,
-      postcode: this.postcode
+      address: this.address
     })
-    return result
   }
 
   async login(comparePassword) {
