@@ -45,8 +45,15 @@ async function signup(req, res) {
   }
 
   const newUser = new User(email, password, fullName, street, city, postcode)
-  const existingUser = await newUser.existsAlready()
   
+  let existingUser
+  try {
+    existingUser = await newUser.existsAlready()
+  } catch (error) {
+    next(error)
+    return
+  }
+
   if(existingUser) {
     validationSession.flashErrorsToSession(req, {
       message: "User exists already.",
@@ -65,7 +72,12 @@ async function signup(req, res) {
     return
   }
 
-  await newUser.signup()
+  try {
+    await newUser.signup()
+  } catch (error) {
+    next(error)
+    return
+  }
 
   res.redirect("/login")
 }
@@ -74,7 +86,14 @@ async function login(req, res) {
   const {email, password} = req.body
 
   const newUser = new User(email, password)
-  const existingUser = await newUser.getUserWithSameEmail()
+  
+  let existingUser
+  try {
+    existingUser = await newUser.getUserWithSameEmail()
+  } catch (error) {
+    next(error)
+    return
+  }
 
   if(!existingUser) {
     validationSession.flashErrorsToSession(req, {
@@ -89,7 +108,13 @@ async function login(req, res) {
     return
   }
 
-  const passwordsAreEqual = await newUser.login(existingUser.password)
+  let passwordsAreEqual
+  try {
+    passwordsAreEqual = await newUser.login(existingUser.password)
+  } catch (error) {
+    next(error)
+    return
+  }
 
   if(!passwordsAreEqual) {
     validationSession.flashErrorsToSession(req, {

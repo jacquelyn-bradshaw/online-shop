@@ -45,7 +45,13 @@ async function addProduct(req, res) {
   }
 
   const newProduct = new Product(title, image, price, summary)
-  await newProduct.saveProduct()
+  
+  try {
+    await newProduct.saveProduct()
+  } catch (error) {
+    next(error)
+    return
+  }
 
   res.redirect("/admin")
 }
@@ -56,7 +62,13 @@ async function editProductView(req, res) {
   }
   
   let product = new Product(null, null, null, null, req.params.id)
-  product = await product.getProduct()
+  
+  try {
+    product = await product.getProduct()
+  } catch (error) {
+    next(error)
+    return
+  }
 
   if (!product) {
     return res.status(404).render("errors/404")
@@ -71,14 +83,26 @@ async function updateProduct(req, res) {
   const image = req.locals.filename
 
   const newProduct = new Product(title, image, price, summary, req.params.id)
-  await newProduct.updateProduct()
+  
+  try {
+    await newProduct.updateProduct()
+  } catch (error) {
+    next(error)
+    return
+  }
 
   res.redirect("/admin")
 }
 
 async function deleteProduct(req, res) {
   const deleteProduct = new Product(null, null, null, null, req.params.id)
-  await deleteProduct.delProduct()
+  
+  try {
+    await deleteProduct.delProduct()
+  } catch (error) {
+    next(error)
+    return
+  }
 
   res.redirect("/admin")
 }
