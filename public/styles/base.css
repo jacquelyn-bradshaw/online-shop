@@ -68,6 +68,10 @@ a:active {
   color: white;
 }
 
+#main-header form {
+  margin: 0;
+}
+
 #main-header button {
   font: inherit;
   background-color: transparent;
@@ -75,6 +79,7 @@ a:active {
   cursor: pointer;
   color: white;
   padding: 0;
+  margin: 0;
 }
 
 #main-header a:hover,
