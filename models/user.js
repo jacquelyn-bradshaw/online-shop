@@ -2,9 +2,14 @@ const bcrypt = require("bcryptjs")
 const db = require("../data/database")
 
 class User {
-  constructor(email, password) {
+  constructor(email, password, fullName, street, city, postcode) {
     this.email = email
     this.password = password
+    this.fullName = fullName
+    this.address = {
+      street: street,
+      city: city,
+      postcode: postcode}
   }
 
   async getUserWithSameEmail() {
@@ -27,11 +32,12 @@ class User {
 
   async signup() {
     const hashedPassword = await bcrypt.hash(this.password, 12)
-    const result = await db.getDb().collection("users").insertOne({
+    await db.getDb().collection("users").insertOne({
       email: this.email,
-      password: hashedPassword
+      password: hashedPassword,
+      fullName: this.fullName,
+      address: this.address
     })
-    return result
   }
 
   async login(comparePassword) {

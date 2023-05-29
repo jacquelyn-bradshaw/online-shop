@@ -1,10 +1,18 @@
-function userCredentialsAreValid(email, confirmEmail, password) {
+function userCredentialsAreValid(email, confirmEmail, password, fullName, street, city, postcode) {
   return email && 
   confirmEmail && 
   password && 
+  fullName &&
+  street &&
+  city &&
+  postcode &&
   password.trim().length > 6 && 
   email === confirmEmail && 
-  email.includes("@")
+  email.includes("@") &&
+  fullName.trim() !== "" &&
+  street.trim() !== "" &&
+  city.trim() !== "" &&
+  postcode.trim() !== ""
 }
 
 function productIsValid(title, image, price, summary) {

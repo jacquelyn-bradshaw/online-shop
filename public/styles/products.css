@@ -10,10 +10,10 @@
 
 #product-item {
   margin: 1rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 8px var(--color-shadow);
   border-radius: 8px;
   padding: 1rem;
-  background-color: rgb(220, 204, 252);
+  background-color: var(--color-purple-100);
 }
 
 #product-item h2,
@@ -33,15 +33,6 @@
   gap: 1rem;
 }
 
-#product-actions ul {
-  list-style: none;
-}
-
-#product-actions a {
-  text-decoration: none;
-}
-
 #product-detail a {
-  text-decoration: none;
   display: block;
 }

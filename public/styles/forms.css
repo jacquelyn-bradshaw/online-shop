@@ -2,9 +2,14 @@
   margin-bottom: 0.5rem;
 }
 
+form hr {
+  border-color: var(--color-purple-200);
+  margin: 1rem;
+}
+
 label {
  display: block;
- font-weight: bold;
+ color: var(--color-purple-600);
  margin-bottom: 0.5rem;
 }
 
@@ -14,21 +19,21 @@ textarea {
   font-size: 1.25rem;
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  border: 1px solid rgb(204, 204, 204);
-  width: 100%;
+  border: 1px solid var(--color-grey-100);
+  width: 90%;
   box-sizing: border-box;
-  color: rgb(78, 73, 73);
+  color: var(--color-grey-500);
 }
 
 input:focus,
 textarea:focus {
-  background-color: rgb(245, 232, 255);
+  background-color: var(--color-purple-200);
 }
 
 #input-error {
   margin: 1rem 0;
   padding: 0.5rem;
-  background-color: rgb(251, 217, 217);
-  color: rgb(144, 33, 33);
+  background-color: var(--color-purple-200);
+  color: var(--color-error);
   border-radius: 4px;
 }
