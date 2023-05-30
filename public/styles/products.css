@@ -3,9 +3,10 @@
 }
 
 #products-list {
-  margin: 3rem auto;
-  max-width: 40rem;
-  list-style: none;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
 }
 
 #product-item {
@@ -14,6 +15,7 @@
   border-radius: 8px;
   padding: 1rem;
   background-color: var(--color-purple-100);
+  text-align: center;
 }
 
 #product-item h2,
@@ -22,8 +24,9 @@
 }
 
 #product-item img {
-  width: 200px;
-  height: 200px;
+  width: 90%;
+  height: 15rem;
+  object-fit: cover;
 }
 
 #product-actions {
@@ -31,6 +34,16 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
+}
+
+#product-actions form {
+  margin: 0;
+  padding: 0;
+}
+
+#product-actions form button{
+  margin: 0;
+  padding: 0;
 }
 
 #product-detail a {
