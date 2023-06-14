@@ -10,14 +10,14 @@
       <img src="/images/<%= product.image %>" alt="Image of the product" />
       <p><%= product.price %></p>
       <% if (!locals.isAdmin) { %>
-      <a id="btn" href="">Add to basket</a>
+      <a id="btn-basket" href="">Add to basket</a>
       <% } %>
       <p><%= product.summary %></p>
       <div id="product-actions">
         <% if (locals.isAdmin) { %>
         <ul>
           <li>
-            <a id="btn" href="/products/<%= product._id %>/edit">
+            <a class="btn btn-alt" href="/products/<%= product._id %>/edit">
               Edit Product
             </a>
           </li>
